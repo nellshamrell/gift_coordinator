@@ -18,3 +18,12 @@ Then /^I should see "([^"]*)"$/ do |text|
   page.should have_content(text)
 end
 
+Then /^I should be on the gift page for "([^"]*)"$/ do |name|
+  Gift.count.should == 1
+  current_path = URI.parse(current_url).path
+  if current_path.respond_to? :should
+    current_path.should == gift_path(Gift.first)
+  else
+    assert_equal path gift_path(Gift.first), current_path
+  end
+end

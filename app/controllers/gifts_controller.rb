@@ -9,9 +9,13 @@ class GiftsController < ApplicationController
 
   def create
     @gift = Gift.new(params[:gift])
-    @gift.save
-    flash[:notice] = "Gift has been created."
-    redirect_to @gift
+    if @gift.save
+      flash[:notice] = "Gift has been created."
+      redirect_to @gift
+    else
+      flash[:alert] = "Gift has not been created."
+      render :action => "new"
+    end
   end
 
   def show
