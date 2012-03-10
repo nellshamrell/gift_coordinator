@@ -7,7 +7,7 @@ When /^I click the "([^"]*)" link$/ do |link|
 end
 
 When /^I click the "([^"]*)" button$/ do |button|
-  click_button('Create Gift')
+  click_button(button)
 end
 
 When /^I fill in "([^"]*)" with "([^"]*)"$/ do |field, input|
@@ -22,7 +22,6 @@ Given /^there is a Gift$/ do
   Factory(:gift)
 end
 
-
 Then /^I should be on the gift page for "([^"]*)"$/ do |name|
   Gift.count.should == 1
   current_path = URI.parse(current_url).path
@@ -32,3 +31,9 @@ Then /^I should be on the gift page for "([^"]*)"$/ do |name|
     assert_equal path gift_path(Gift.first), current_path
   end
 end
+
+When /^I visit the page for the Gift$/ do
+  Gift.count.should == 1
+  visit(gift_path(Gift.first))
+end
+

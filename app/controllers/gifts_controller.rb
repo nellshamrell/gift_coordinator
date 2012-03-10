@@ -21,4 +21,19 @@ class GiftsController < ApplicationController
   def show
     @gift = Gift.find(params[:id])
   end
+
+  def edit
+    @gift = Gift.find(params[:id])
+  end
+
+  def update
+    @gift = Gift.find(params[:id])
+    if @gift.update_attributes(params[:gift])
+      flash[:notice] = "Gift has been updated."
+      redirect_to @gift
+    else
+      flash[:alert] = "Gift has not been updated."
+      render :action => "edit"
+    end
+  end
 end
