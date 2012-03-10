@@ -1,4 +1,8 @@
 class GiftsController < ApplicationController
+  before_filter :find_gift, :only => [:show,
+                                     :edit,
+                                     :update,
+                                     :destroy]
   def index
     @gifts = Gift.all
   end
@@ -19,15 +23,12 @@ class GiftsController < ApplicationController
   end
 
   def show
-    @gift = Gift.find(params[:id])
   end
 
   def edit
-    @gift = Gift.find(params[:id])
   end
 
   def update
-    @gift = Gift.find(params[:id])
     if @gift.update_attributes(params[:gift])
       flash[:notice] = "Gift has been updated."
       redirect_to @gift
@@ -43,4 +44,12 @@ class GiftsController < ApplicationController
     flash[:notice] = "Gift has been deleted."
     redirect_to gifts_path 
   end
+
+  private
+    def find_gift
+      @gift = Gift.find(params[:id])
+      rescue ActiveRecord::RecordNotFound
+      flash[:alert] = "The gift you were looking for could not be found."
+      redirect_to gifts_path
+    end
 end
