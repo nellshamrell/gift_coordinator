@@ -1,1 +1,7 @@
+<h2>Gifts</h2>
 <%= link_to "New Gift", new_gift_path %>
+<ul>
+  <% @gifts.each do |gift| %>
+    <li><%= link_to gift.name, gift %>
+  <% end %>
+</ul>

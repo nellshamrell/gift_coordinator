@@ -18,6 +18,11 @@ Then /^I should see "([^"]*)"$/ do |text|
   page.should have_content(text)
 end
 
+Given /^there is a Gift$/ do
+  Factory(:gift)
+end
+
+
 Then /^I should be on the gift page for "([^"]*)"$/ do |name|
   Gift.count.should == 1
   current_path = URI.parse(current_url).path
