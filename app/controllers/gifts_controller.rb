@@ -36,4 +36,11 @@ class GiftsController < ApplicationController
       render :action => "edit"
     end
   end
+
+  def destroy
+    @gift = Gift.find(params[:id])
+    @gift.destroy
+    flash[:notice] = "Gift has been deleted."
+    redirect_to gifts_path 
+  end
 end
