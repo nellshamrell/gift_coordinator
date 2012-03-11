@@ -34,8 +34,11 @@ end
 
 group :test do
   gem 'cucumber-rails'
+  gem 'gherkin'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'factory_girl'
   gem 'launchy'
 end
+
+gem 'devise'

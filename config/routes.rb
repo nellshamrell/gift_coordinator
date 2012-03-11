@@ -1,4 +1,6 @@
 GiftCoordinator::Application.routes.draw do
+  devise_for :users
+
   root :to => "gifts#index"
   resources :gifts
   # The priority is based upon order of creation:
